@@ -86,6 +86,30 @@ self.addEventListener("install", (event) => {
     );
 });
 
+self.addEventListener('online', (event) => {
+    console.log('The application is now online.');
+
+    caches.open(CACHE_NAME)
+        .then((cache) => {
+            return cache.addAll(urlsToCache);
+        })
+        .catch((error) => {
+            console.log('Caching failed:', error);
+        });
+});
+
+self.addEventListener('offline', (event) => {
+    console.log('The application is now offline.');
+
+    // event.waitUntil(
+    //     caches.open('my-app')
+    //         .then((cache) => {
+    //             return cache.addAll([
+    //                 '/offline.html'
+    //             ]);
+    //         })
+    // );
+});
 self.addEventListener('fetch', (event) => {
     event.respondWith(
         caches.match(event.request)
