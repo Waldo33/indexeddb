@@ -1,4 +1,16 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.App {
+    height: 100vh;
+    width: 100%;
+}
+
 .product-card {
+    margin: 10px auto;
     display: flex;
     flex-direction: column;
     border: 1px solid #e8e8e8;

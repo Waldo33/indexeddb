@@ -76,7 +76,7 @@ self.addEventListener('message', (event) => {
 
 
 const CACHE_NAME = "fake-store-cache-v1";
-const urlsToCache = ["/", "/index.html", "/manifest.json", "/logo512.png", "/service-worker.js"];
+const urlsToCache = ["/", "https://fakestoreapi.com/products", "/favicon.ico", "/index.html", "/manifest.json","/logo192.png", "/logo512.png", "/service-worker.js"];
 
 self.addEventListener("install", (event) => {
     event.waitUntil(
@@ -86,10 +86,18 @@ self.addEventListener("install", (event) => {
     );
 });
 
-self.addEventListener("fetch", (event) => {
+self.addEventListener('fetch', (event) => {
     event.respondWith(
-        caches.match(event.request).then((response) => {
-            return response || fetch(event.request);
-        })
+        caches.match(event.request)
+            .then((response) => {
+                if (response) {
+                    return response;
+                }
+
+                return fetch(event.request);
+            })
+            // .catch(() => {
+            //     return caches.match('/offline.html');
+            // })
     );
 });

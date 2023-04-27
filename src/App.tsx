@@ -47,12 +47,14 @@ function App() {
 
   return (
     <div className="App">
+        <div className={"product-list"}>
         {products.map((product) => (
             <ProductCard
                 key={product.id}
                 product={product}
             />
         ))}
+        </div>
     </div>
   );
 }
